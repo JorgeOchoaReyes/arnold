@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { useRouter } from "next/router";
 import { Button } from "../ui/button";
 
-const options = [
+const options = [ 
   { name: "Arnold", href: "/" },
   { name: "Use Cases", href: "/use-cases" },
   { name: "Features", href: "/features" }, 
@@ -16,7 +16,7 @@ export const MenuBar = () => {
 
   return (
     <motion.div> 
-      <div className="flex flex-row items-center justify-center px-4 pt-6 bg-gray-950 border-b border-gray-800 gap-32"> 
+      <div className="flex flex-row items-center justify-center px-4 pt-6 bg-gray-950 border-b border-gray-800 gap-32">                
         {
           options.map((option) => ( 
             <motion.button
