@@ -6,7 +6,7 @@ import { FiDollarSign, FiEye, FiPlay, FiSearch } from "react-icons/fi";
 export const Features = () => {
   return (
     <>
-      <div className="flex h-48 flex-col items-center justify-center bg-slate-900"> 
+      <div className="flex h-48 flex-col items-center justify-center bg-black"> 
         <span className="mt-2 block rounded-full bg-indigo-600 px-4 py-1 text-center font-medium text-white md:hidden">
           Note: This is much cooler on desktop 😊
         </span>
