@@ -8,7 +8,7 @@ const options = [
   { name: "Use Cases", href: "/use-cases" },
   { name: "Features", href: "/features" }, 
   { name: "Blog", href: "/blog" },  
-  { name: "Pricing", href: "/pricing" }, 
+  { name: "Pricing", href: "#pricing" }, 
 ];
 
 export const MenuBar = () => {
@@ -16,7 +16,7 @@ export const MenuBar = () => {
 
   return (
     <motion.div> 
-      <div className="flex flex-row items-center justify-center px-4 pt-6 bg-gray-950 border-b border-gray-800 gap-32">                
+      <div className="flex flex-row items-center justify-center px-4 pt-3 bg-[#0f0e13] border-b border-gray-800 gap-32">                
         {
           options.map((option) => ( 
             <motion.button
@@ -36,13 +36,13 @@ export const MenuBar = () => {
                 transition: "ease-in-out 0.2s",
               }}
               onClick={() => router.push(option.href)}
-              className="text-gray-50 hover:text-gray-100 pb-6"
+              className="text-gray-50 hover:text-gray-100 pb-4"
             >
               {option.name.toUpperCase()}
             </motion.button> 
           ))
         } 
-        <div className="hover:text-gray-100 pb-6"> 
+        <div className="hover:text-gray-100 pb-4"> 
           <Button onClick={() => router.push("/dashboard")} className="p-4 rounded-xl"> 
             Get Started
           </Button>

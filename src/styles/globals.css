@@ -92,3 +92,7 @@
     linear-gradient(var(--dot-bg) calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
     var(--dot-color);
 }
+
+html {
+  scroll-behavior: smooth;
+}

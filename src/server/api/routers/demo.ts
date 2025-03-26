@@ -6,7 +6,7 @@ import {
 } from "~/server/api/trpc";
 
 export const demoRouter = createTRPCRouter({
-  hello: publicProcedure
+  demoFeedback: publicProcedure
     .input(z.object({ text: z.string() }))
     .query(({ input }) => {
       return {

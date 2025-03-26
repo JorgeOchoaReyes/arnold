@@ -1,5 +1,5 @@
 import { SidebarProvider, SidebarInset } from "~/components/ui/sidebar";
-import { AppSidebar } from "~/components/app-sidebar"; 
+import { AppSidebar } from "~/components/sidebar/app-sidebar"; 
 
 export const DashboardLayout: React.FC<{
     children: React.ReactNode;
