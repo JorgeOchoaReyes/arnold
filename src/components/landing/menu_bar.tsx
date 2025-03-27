@@ -16,7 +16,7 @@ export const MenuBar = () => {
 
   return (
     <motion.div> 
-      <div className="flex flex-row items-center justify-center px-4 pt-3 bg-[#0f0e13] border-b border-gray-800 gap-32">                
+      <div className="flex flex-row items-center justify-center px-4 pt-4 bg-[#0f0e13] border-b border-gray-800 gap-32">                
         {
           options.map((option) => ( 
             <motion.button
@@ -31,7 +31,7 @@ export const MenuBar = () => {
               }}
               style={{ 
                 borderBottomWidth: 2,
-                borderBottomColor: router.pathname === option.href ? "white" : "transparent",
+                borderBottomColor: "transparent",
                 color: "#b6b6b7",
                 transition: "ease-in-out 0.2s",
               }}

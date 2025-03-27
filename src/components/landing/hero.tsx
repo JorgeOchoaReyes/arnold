@@ -8,9 +8,11 @@ import { useSession } from "next-auth/react";
 import { MenuBar } from "./menu_bar";
 import { Mic } from "lucide-react";
 import { SlideShow } from "./slide_show";
+import { DemoDialog } from "./demo_dialog";
 
 export const AuroraHero = () => { 
   const router = useRouter();
+  const [open, setOpen] = React.useState(false);
   const { data: session } = useSession(); 
   
   return ( 
@@ -56,12 +58,7 @@ export const AuroraHero = () => {
             }}
             whileTap={{ scale: 0.985, }}
             onClick={async () => {
-              console.log("clicked");
-              // Trigger mic permision
-              // Present user with a simple problem 
-              // Allow one answer 
-              // We respond and give feedback
-              // Add time outs 
+              setOpen(true);
             }}
             style={{ 
               boxShadow: "0 0 0 2px #000, 0 0 0 4px #fff", 
@@ -74,6 +71,7 @@ export const AuroraHero = () => {
         </div>
       </motion.div> 
       <SlideShow />
+      <DemoDialog open={open} setOpen={setOpen} />
     </div>
   );
 };
