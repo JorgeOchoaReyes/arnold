@@ -24,9 +24,9 @@ export const DemoDialog: React.FC<{
 }) => { 
   const {startWebCall, endWebCall} = useDemo(); 
 
-  return <Dialog open={open} > 
+  return <Dialog open={open} onOpenChange={(open) => setOpen(open)}> 
     <DialogContent className="sm:max-w-[600px] border-2 border-gray-800 rounded-lg">
-      <DialogHeader>
+      <DialogHeader >
         <DialogTitle className="text-center text-2xl font-medium leading-tight">Mock Interivew</DialogTitle>
         <DialogDescription className="text-start text-sm text-muted-foreground flex-wrap">
           <Typewriter 
