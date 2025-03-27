@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"; 
+import React from "react"; 
 import useDemo from "~/hooks/use-demo";
 import { Button } from "../ui/button";
 import {
@@ -8,8 +8,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle, 
-} from "../ui/dialog";
-import { Input } from "../ui/input"; 
+} from "../ui/dialog"; 
 import { Mic, PhoneOff } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@radix-ui/react-tooltip";
 import { Typewriter } from "../text/typewriter";
