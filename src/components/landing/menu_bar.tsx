@@ -43,7 +43,7 @@ export const MenuBar = () => {
           ))
         } 
         <div className="hover:text-gray-100 pb-4"> 
-          <Button onClick={() => router.push("/dashboard")} className="p-4 rounded-xl"> 
+          <Button onClick={() => router.push("/dashboard")} className="p-4 rounded-xl bg-white hover:bg-slate-300"> 
             Get Started
           </Button>
         </div>

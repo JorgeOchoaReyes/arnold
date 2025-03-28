@@ -38,9 +38,10 @@ export const SlideShow = () => {
                   <AvatarImage src={a.src} alt="inteviewers" />
                   <AvatarFallback>CN</AvatarFallback>
                 </Avatar>
-                <div className="p-1">
+                <div className="p-1 flex flex-col justify-center items-center">
                   <h3>{a.name}</h3>
-                  <p className="text-pretty">{a.description}</p>
+                  <hr />
+                  <p className="text-pretty text-gray-400 leading-tight">{a.description}</p>
                 </div> 
               </div>
             </CarouselItem>

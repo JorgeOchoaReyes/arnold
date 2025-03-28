@@ -4,7 +4,7 @@ export const Mock_Interviewers = [
   {
     id: 1,
     name: "Technical Interview",
-    description: "Technical Interview Description",
+    description: "Assesses coding, problem-solving, and CS fundamentals.",
     image: "technical-interview.jpg",
     icon: <CodeIcon size={48} />,
     src: "https://github.com/shadcn.png",
@@ -12,15 +12,15 @@ export const Mock_Interviewers = [
   {
     id: 2,
     name: "Behavioral Interview",
-    description: "Behavioral Interview Description",
+    description: "Evaluates soft skills, teamwork, and past work experiences.",
     image: "behavioral-interview.jpg",
     icon: <PersonStanding size={48} />,
     src: "https://github.com/shadcn.png",
-  }, 
+  },
   {
     id: 3,
     name: "Phone Interview",
-    description: "Phone Interview Description",
+    description: "Screens basic skills and communication before on-site.",
     image: "phone-interview.jpg",
     icon: <Phone size={48} />,
     src: "https://github.com/shadcn.png",
@@ -28,7 +28,7 @@ export const Mock_Interviewers = [
   {
     id: 4,
     name: "Technical Focus Interviewer",
-    description: "Phone Interview Description",
+    description: "Deeply probes technical expertise in algorithms and design.",
     image: "phone-interview.jpg",
     icon: <Phone size={48} />,
     src: "https://github.com/shadcn.png",
@@ -36,15 +36,15 @@ export const Mock_Interviewers = [
   {
     id: 5,
     name: "Friendly Interviewer",
-    description: "Phone Interview Description",
+    description: "Creates a relaxed space to showcase best abilities.",
     image: "phone-interview.jpg",
     icon: <Phone size={48} />,
     src: "https://github.com/shadcn.png",
   },
   {
     id: 6,
-    name: "Aggresive Interviewer",
-    description: "Phone Interview Description",
+    name: "Aggressive Interviewer",
+    description: "Tests problem-solving under pressure with hard questions.",
     image: "phone-interview.jpg",
     icon: <Phone size={48} />,
     src: "https://github.com/shadcn.png",
@@ -52,7 +52,7 @@ export const Mock_Interviewers = [
   {
     id: 7,
     name: "Negative Interviewer",
-    description: "Phone Interview Description",
+    description: "Gauges resilience and handles difficult scenarios.",
     image: "phone-interview.jpg",
     icon: <Phone size={48} />,
     src: "https://github.com/shadcn.png",
@@ -60,7 +60,7 @@ export const Mock_Interviewers = [
   {
     id: 8,
     name: "Helpful Interviewer",
-    description: "Phone Interview Description",
+    description: "Guides and hints to understand problem-solving process.",
     image: "phone-interview.jpg",
     icon: <Phone size={48} />,
     src: "https://github.com/shadcn.png",
