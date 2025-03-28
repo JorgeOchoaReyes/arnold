@@ -7,6 +7,7 @@ export const Mock_Interviewers = [
     description: "Technical Interview Description",
     image: "technical-interview.jpg",
     icon: <CodeIcon size={48} />,
+    src: "https://github.com/shadcn.png",
   },
   {
     id: 2,
@@ -14,6 +15,7 @@ export const Mock_Interviewers = [
     description: "Behavioral Interview Description",
     image: "behavioral-interview.jpg",
     icon: <PersonStanding size={48} />,
+    src: "https://github.com/shadcn.png",
   }, 
   {
     id: 3,
@@ -21,6 +23,7 @@ export const Mock_Interviewers = [
     description: "Phone Interview Description",
     image: "phone-interview.jpg",
     icon: <Phone size={48} />,
+    src: "https://github.com/shadcn.png",
   },
   {
     id: 4,
@@ -28,6 +31,7 @@ export const Mock_Interviewers = [
     description: "Phone Interview Description",
     image: "phone-interview.jpg",
     icon: <Phone size={48} />,
+    src: "https://github.com/shadcn.png",
   },
   {
     id: 5,
@@ -35,6 +39,7 @@ export const Mock_Interviewers = [
     description: "Phone Interview Description",
     image: "phone-interview.jpg",
     icon: <Phone size={48} />,
+    src: "https://github.com/shadcn.png",
   },
   {
     id: 6,
@@ -42,6 +47,7 @@ export const Mock_Interviewers = [
     description: "Phone Interview Description",
     image: "phone-interview.jpg",
     icon: <Phone size={48} />,
+    src: "https://github.com/shadcn.png",
   },
   {
     id: 7,
@@ -49,6 +55,7 @@ export const Mock_Interviewers = [
     description: "Phone Interview Description",
     image: "phone-interview.jpg",
     icon: <Phone size={48} />,
+    src: "https://github.com/shadcn.png",
   },
   {
     id: 8,
@@ -56,5 +63,6 @@ export const Mock_Interviewers = [
     description: "Phone Interview Description",
     image: "phone-interview.jpg",
     icon: <Phone size={48} />,
+    src: "https://github.com/shadcn.png",
   },
 ];
