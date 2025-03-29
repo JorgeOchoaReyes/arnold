@@ -133,7 +133,7 @@ const Card = ({ className, children, style = {} }: CardProps) => {
       }}
       style={style}
       className={twMerge(
-        "relative h-full w-full overflow-hidden rounded-2xl border border-zinc-700 bg-[#020818] p-6",
+        "relative h-full w-full overflow-hidden rounded-2xl border border-zinc-700 bg-[#0f0e13] p-6",
         className
       )}
     >
