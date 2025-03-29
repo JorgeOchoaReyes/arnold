@@ -8,7 +8,7 @@ import {
   DialogHeader,
   DialogTitle, 
 } from "../ui/dialog"; 
-import { Phone, SignalIcon } from "lucide-react"; 
+import { Loader2, Phone, SignalIcon } from "lucide-react"; 
 import { Typewriter } from "../text/typewriter"; 
 import {
   Select,
@@ -44,6 +44,8 @@ export const DemoDialog: React.FC<{
     callOnGoing, 
     setCallOnGoing,
     resultsOfLatestCall,
+    countDown,
+    loading,
   } = useDemo(); 
 
   return <Dialog open={open} onOpenChange={(open) => {
@@ -55,7 +57,7 @@ export const DemoDialog: React.FC<{
     <DialogContent className={`${(callOnGoing || resultsOfLatestCall?.summary) ? "sm:max-w-[800px]" : "sm:max-w-[500px]"} border-2 border-[#1a1a1a] rounded-lg [&>button]:hidden transition-all duration-75 ease-in-out`}>
       <DialogHeader >
         <DialogTitle className="text-center text-2xl font-medium flex flex-row items-center justify-center w-full">
-          <p className="mx-auto"> Incoming Call  </p> 
+          <p className="mx-auto"> Incoming Call </p> 
           <SignalIcon className="text-green-500" /> 
         </DialogTitle>
         <hr /> 
@@ -82,7 +84,7 @@ export const DemoDialog: React.FC<{
                   </SelectTrigger>
                   <SelectContent className="w-[180px]">
                     <SelectGroup>
-                      <SelectLabel> Interviewers</SelectLabel>
+                      <SelectLabel> Interviewers </SelectLabel>
                       {Mock_Interviewers.map((a, index) => (
                         <SelectItem key={index} value={a.name} className="cursor-pointer hover:bg-[#1a1a1a]"> 
                           {a.name}
@@ -94,7 +96,8 @@ export const DemoDialog: React.FC<{
               </div> 
             </div>
             {
-              resultsOfLatestCall?.summary &&
+              loading ? <Loader2 className="w-16 h-16 animate-spin text-gray-200" /> :
+                resultsOfLatestCall?.summary && !callOnGoing && 
               <motion.div className="flex flex-col items-start justify-start w-96 bg-purple-600 rounded-lg p-4 border-2 border-[#1a1a1a]"
                 initial={{ opacity: 0, y: -50 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -131,13 +134,12 @@ export const DemoDialog: React.FC<{
         <div className="flex flex-row w-full justify-around">    
           {
             callOnGoing ? 
-              <Button onClick={() => endWebCall()} className="text-white bg-[#fd695e] hover:bg-red-500 text-xl px-8 py-6 rounded-xl font-medium leading-tight">  
-                <Phone className="w-44 h-w-44 text-white fill-white mx-auto cursor-pointer rotate-[135deg] mr-1" /> End Call
+              <Button onClick={async () => await endWebCall()} className="text-white bg-[#fd695e] hover:bg-red-500 text-xl px-8 py-6 rounded-xl font-medium leading-tight">  
+                <Phone className="w-44 h-w-44 text-white fill-white mx-auto cursor-pointer rotate-[135deg] mr-1" /> End Call - {callOnGoing ? `${countDown} secs` : ""}
               </Button>
               :
               <>
-                <Button onClick={ () => {
-                  endWebCall();
+                <Button onClick={async () => { 
                   setOpen(false); 
                 }} className="text-white font-medium leading-tight bg-[#fd695e] hover:bg-red-500 text-xl px-8 py-6 rounded-xl">  
                   <Phone className="w-44 h-w-44 text-white fill-white mx-auto cursor-pointer rotate-[135deg] mr-1" /> Reject
@@ -145,11 +147,11 @@ export const DemoDialog: React.FC<{
                 <Button onClick={async () => {
                   await startWebCall();  
                 }} className="text-white bg-[#52b559] hover:bg-green-500 text-xl px-8 py-6 rounded-xl font-medium leading-tight">
-                  <Phone className="w-44 h-w-44 text-white fill-white mx-auto cursor-pointer mr-1" /> Accept
+                  <Phone className="w-44 h-w-44 text-white fill-white mx-auto cursor-pointer mr-1" /> {resultsOfLatestCall?.summary ? "Start New Call" : "Accept"}
                 </Button>  
               </>
           } 
-        </div> 
+        </div>  
       </div> 
     </DialogContent>
   </Dialog>;

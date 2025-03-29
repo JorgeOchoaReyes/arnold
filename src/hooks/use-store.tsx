@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { createJSONStorage, devtools, persist } from "zustand/middleware"; 
+import { createJSONStorage, persist } from "zustand/middleware"; 
 
 type CallResults = {
     id: string;

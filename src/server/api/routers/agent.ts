@@ -13,5 +13,4 @@ export const agentRouter = createTRPCRouter({
         greeting: `Hello ${input.text}`,
       };
     }),
- 
 });

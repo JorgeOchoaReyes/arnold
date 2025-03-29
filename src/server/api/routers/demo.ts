@@ -20,7 +20,7 @@ export const demoRouter = createTRPCRouter({
       if(!callDetails) {
         throw new Error("[SERVER_ERROR]: Call not found");
       } 
-
+      console.log("[INFO]: Call details: " + callDetails?.analysis?.summary, input.callId);
       return {
         id: callDetails.id,
         summary: callDetails.analysis?.summary,
