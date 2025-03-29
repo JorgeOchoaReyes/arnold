@@ -54,7 +54,7 @@ export default function useDemo() {
           console.error("Error ending call:", error); 
         });
       }
-    }, 10000); 
+    }, 60000); 
   }; 
 
   const endWebCall = async (id?: string) => {

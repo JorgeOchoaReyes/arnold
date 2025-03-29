@@ -66,7 +66,7 @@ export const DemoDialog: React.FC<{
             <div className="flex flex-col items-center justify-center"> 
               <div className="flex flex-col items-center justify-center my-4">  
                 <Avatar className="w-24 h-24 mt-4 mb-2">
-                  <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+                  <AvatarImage src={interviewer?.src} alt={interviewer?.name} />
                   <AvatarFallback>CN</AvatarFallback>
                 </Avatar>
                 <p className="text-lg font-semibold text-center">{interviewer?.name}</p>

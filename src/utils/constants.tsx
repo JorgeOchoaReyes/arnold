@@ -7,7 +7,7 @@ export const Mock_Interviewers = [
     description: "Assesses coding, problem-solving, and CS fundamentals.",
     image: "technical-interview.jpg",
     icon: <CodeIcon size={48} />,
-    src: "https://github.com/shadcn.png",
+    src: "/technical.svg",
   },
   {
     id: 2,
@@ -15,7 +15,7 @@ export const Mock_Interviewers = [
     description: "Evaluates soft skills, teamwork, and past work experiences.",
     image: "behavioral-interview.jpg",
     icon: <PersonStanding size={48} />,
-    src: "https://github.com/shadcn.png",
+    src: "/behavior.svg",
   },
   {
     id: 3,
@@ -23,7 +23,7 @@ export const Mock_Interviewers = [
     description: "Screens basic skills and communication before on-site.",
     image: "phone-interview.jpg",
     icon: <Phone size={48} />,
-    src: "https://github.com/shadcn.png",
+    src: "/phone.svg",
   },
   {
     id: 4,
@@ -31,7 +31,7 @@ export const Mock_Interviewers = [
     description: "Deeply probes technical expertise in algorithms and design.",
     image: "phone-interview.jpg",
     icon: <Phone size={48} />,
-    src: "https://github.com/shadcn.png",
+    src: "/tech.svg",
   },
   {
     id: 5,
@@ -39,7 +39,7 @@ export const Mock_Interviewers = [
     description: "Creates a relaxed space to showcase best abilities.",
     image: "phone-interview.jpg",
     icon: <Phone size={48} />,
-    src: "https://github.com/shadcn.png",
+    src: "/friendly.svg",
   },
   {
     id: 6,
@@ -47,7 +47,7 @@ export const Mock_Interviewers = [
     description: "Tests problem-solving under pressure with hard questions.",
     image: "phone-interview.jpg",
     icon: <Phone size={48} />,
-    src: "https://github.com/shadcn.png",
+    src: "/aggresive.svg",
   },
   {
     id: 7,
@@ -55,7 +55,7 @@ export const Mock_Interviewers = [
     description: "Gauges resilience and handles difficult scenarios.",
     image: "phone-interview.jpg",
     icon: <Phone size={48} />,
-    src: "https://github.com/shadcn.png",
+    src: "/negative.svg",
   },
   {
     id: 8,
@@ -63,6 +63,6 @@ export const Mock_Interviewers = [
     description: "Guides and hints to understand problem-solving process.",
     image: "phone-interview.jpg",
     icon: <Phone size={48} />,
-    src: "https://github.com/shadcn.png",
+    src: "/helpful.svg",
   },
 ];
