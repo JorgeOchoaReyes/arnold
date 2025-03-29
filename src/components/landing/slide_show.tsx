@@ -35,7 +35,7 @@ export const SlideShow = () => {
             <CarouselItem key={index} className="lg:basis-1/5 xl:basis-1/6 flex justify-center"> 
               <div className="flex flex-col items-center gap-2 bg-[#0f0e13] border-[#262628] border-2 rounded-sm justify-center p-6">  
                 <Avatar className="w-20 h-20 mt-4 mb-2">
-                  <AvatarImage src={a.src} alt="inteviewers" />
+                  <AvatarImage src={a.src} alt={a.name} />
                   <AvatarFallback>CN</AvatarFallback>
                 </Avatar>
                 <div className="p-1 flex flex-col justify-center items-center">
