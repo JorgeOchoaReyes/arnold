@@ -4,6 +4,7 @@ import { SessionProvider } from "next-auth/react";
 import { type AppType } from "next/app";
 import { ThemeProvider } from "~/components/sidebar/theme-provider";  
 
+import { Analytics } from "@vercel/analytics/react";
 import { api } from "~/utils/api";
 
 import "~/styles/globals.css";
@@ -13,18 +14,21 @@ const MyApp: AppType<{ session: Session | null }> = ({
   pageProps: { session, ...pageProps },
 }) => {
   return (
-    <SessionProvider session={session}>
-      <ThemeProvider
-        attribute="class"
-        defaultTheme="system"
-        enableSystem
-        disableTransitionOnChange
-      >  
-        <div className={GeistSans.className}>
-          <Component {...pageProps} />
-        </div> 
-      </ThemeProvider>
-    </SessionProvider>
+    <>
+      <SessionProvider session={session}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >  
+          <div className={GeistSans.className}>
+            <Component {...pageProps} />
+          </div> 
+        </ThemeProvider>
+      </SessionProvider> 
+      <Analytics />
+    </>
   );
 };
 

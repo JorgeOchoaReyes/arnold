@@ -8,6 +8,7 @@ import {
   LogOut,
   Sparkles,
 } from "lucide-react";
+import { signOut } from "next-auth/react";
 
 import {
   Avatar,
@@ -102,9 +103,11 @@ export function NavUser({
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <LogOut />
-              Log out
+            <DropdownMenuItem onClick={async () => {
+              await signOut({ callbackUrl: "/" });
+            }}>
+              <LogOut /> 
+              Log out 
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

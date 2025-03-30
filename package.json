@@ -43,6 +43,7 @@
     "@types/three": "^0.172.0",
     "@vapi-ai/server-sdk": "^0.5.1",
     "@vapi-ai/web": "^2.2.5",
+    "@vercel/analytics": "^1.5.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "embla-carousel-autoplay": "^8.5.2",

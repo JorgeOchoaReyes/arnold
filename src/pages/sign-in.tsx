@@ -1,10 +1,11 @@
 import React, { type ReactNode } from "react";
-import { SiDiscord } from "react-icons/si";
+import { SiDiscord, SiGithub, SiGoogle } from "react-icons/si";
 import { FiArrowLeft } from "react-icons/fi";
 import { motion } from "framer-motion";
 import { twMerge } from "tailwind-merge";
 import { useRouter } from "next/router";
 import { signIn, signOut, useSession } from "next-auth/react"; 
+import { Button } from "~/components/ui/button";
 
 export default function AuthPage() {
   const router = useRouter();
@@ -58,19 +59,34 @@ const Heading = () => (
 const SocialOptions = () => {
   const { data: sessionData } = useSession();
   return <div> 
-    <BubbleButton className="flex w-full justify-center py-3" 
+    
+    <div className="flex-row flex gap-3"> 
+      <BubbleButton className="flex w-full justify-center py-3" 
+        onClick={async () => {
+          alert("GitHub sign-in is not yet implemented.");
+        }}>
+        <SiGithub />
+      </BubbleButton>
+      <BubbleButton className="flex w-full justify-center py-3" 
+        onClick={async () => {
+          if (sessionData) {
+            alert("You are signed in.");
+            await signOut();
+          } else {
+            alert("You are not signed in.");
+            await signIn("discord", {
+              callbackUrl: "/dashboard",
+            }); 
+          }
+        }}>
+        <SiDiscord />
+      </BubbleButton>
+    </div>
+    <BubbleButton className="flex w-full justify-center py-3 mt-3" 
       onClick={async () => {
-        if (sessionData) {
-          alert("You are signed in.");
-          await signOut();
-        } else {
-          alert("You are not signed in.");
-          await signIn("discord", {
-            callbackUrl: "/dashboard",
-          }); 
-        }
+        alert("Google sign-in is not yet implemented.");
       }}>
-      <SiDiscord />
+      <SiGoogle />
     </BubbleButton>
   </div>;
 };  
@@ -90,30 +106,12 @@ const Terms = () => (
 
 const BubbleButton = ({ children, className, ...rest }: ButtonProps) => {
   return (
-    <button
-      className={twMerge(
-        `
-        relative z-0 flex items-center gap-2 overflow-hidden whitespace-nowrap rounded-md 
-        border border-zinc-700 bg-gradient-to-br from-zinc-800 to-zinc-950
-        px-3 py-1.5
-        text-zinc-50 transition-all duration-300
-        
-        before:absolute before:inset-0
-        before:-z-10 before:translate-y-[200%]
-        before:scale-[2.5]
-        before:rounded-[100%] before:bg-zinc-100
-        before:transition-transform before:duration-500
-        before:content-[""]
-
-        hover:scale-105 hover:text-zinc-900
-        hover:before:translate-y-[0%]
-        active:scale-100`,
-        className
-      )}
+    <Button 
+      className={className}
       {...rest}
     >
       {children}
-    </button>
+    </Button>
   );
 };
 
