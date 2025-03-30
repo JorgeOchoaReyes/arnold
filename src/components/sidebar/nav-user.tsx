@@ -6,6 +6,7 @@ import {
   ChevronsUpDown,
   CreditCard,
   LogOut,
+  Settings,
   Sparkles,
 } from "lucide-react";
 import { signOut } from "next-auth/react";
@@ -46,7 +47,7 @@ export function NavUser({
   return (
     <SidebarMenu>
       <SidebarMenuItem>
-        <div className="flex items-center justify-between">  
+        <div className="flex items-center justify-between mb-1">  
           <div className="grid flex-1 text-left text-sm leading-tight">
             <div className="text-sm text-muted-foreground truncate">Theme</div> 
           </div>
@@ -88,31 +89,33 @@ export function NavUser({
               </div>  
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-              <DropdownMenuItem>
+            <DropdownMenuGroup >
+              <DropdownMenuItem className="cursor-pointer">
                 <Sparkles />
                 Upgrade to Pro
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-              <DropdownMenuItem>
+            <DropdownMenuGroup >
+              <DropdownMenuItem className="cursor-pointer" onClick={async () => {
+                await signOut({ callbackUrl: "/settings" });
+              }}>
                 <BadgeCheck />
                 Account
               </DropdownMenuItem>
-              <DropdownMenuItem>
-                <CreditCard />
-                Billing
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Bell />
-                Notifications
-              </DropdownMenuItem>
+              <DropdownMenuItem className="cursor-pointer" onClick={async () => {
+                await signOut({ callbackUrl: "/settings" });
+              }}>
+                <Settings />
+                Settings
+              </DropdownMenuItem> 
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={async () => {
-              await signOut({ callbackUrl: "/" });
-            }}>
+            <DropdownMenuItem 
+              className="cursor-pointer"
+              onClick={async () => {
+                await signOut({ callbackUrl: "/" });
+              }}>
               <LogOut /> 
               Log out 
             </DropdownMenuItem>
