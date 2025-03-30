@@ -30,6 +30,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "~/components/ui/sidebar"; 
+import { ModeToggle } from "./theme-changer";
 
 export function NavUser({
   user,
@@ -45,6 +46,12 @@ export function NavUser({
   return (
     <SidebarMenu>
       <SidebarMenuItem>
+        <div className="flex items-center justify-between">  
+          <div className="grid flex-1 text-left text-sm leading-tight">
+            <div className="text-sm text-muted-foreground truncate">Theme</div> 
+          </div>
+          <ModeToggle />
+        </div>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <SidebarMenuButton
