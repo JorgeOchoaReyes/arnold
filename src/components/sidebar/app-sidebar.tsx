@@ -5,17 +5,12 @@ import {
   AudioWaveform,
   BookOpen,
   Bot,
-  Command,
-  Frame,
-  GalleryVerticalEnd,
-  Map,
-  PieChart,
+  Command, 
+  GalleryVerticalEnd, 
   Settings2,
   SquareTerminal,
-} from "lucide-react";
-
-import { NavMain } from "~/components/sidebar/nav-main";
-import { NavProjects } from "~/components/sidebar/nav-projects";
+} from "lucide-react"; 
+import { NavMain } from "~/components/sidebar/nav-main"; 
 import { NavUser } from "~/components/sidebar/nav-user";
 import { TeamSwitcher } from "~/components/sidebar/team-switcher";
 import {
@@ -24,8 +19,8 @@ import {
   SidebarFooter,
   SidebarHeader,
   SidebarRail,
-} from "~/components/ui/sidebar";
-import { ModeToggle } from "./theme-changer";
+} from "~/components/ui/sidebar"; 
+import { useSession } from "next-auth/react";
  
 const data = {
   user: {
@@ -136,42 +131,33 @@ const data = {
         },
       ],
     },
-  ],
-  projects: [
-    {
-      name: "Design Engineering",
-      url: "#",
-      icon: Frame,
-    },
-    {
-      name: "Sales & Marketing",
-      url: "#",
-      icon: PieChart,
-    },
-    {
-      name: "Travel",
-      url: "#",
-      icon: Map,
-    },
-  ],
+  ], 
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  
+  const { data: userData } = useSession();
+  
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
         <TeamSwitcher teams={data.teams} />
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={data.navMain} />
-        <NavProjects projects={data.projects} />
+        <NavMain items={data.navMain} /> 
       </SidebarContent>
       <SidebarFooter>
-        <div className="flex items-center justify-between"> 
-          <div className="text-sm text-muted-foreground">Theme</div> 
-          <ModeToggle />
-        </div>
-        <NavUser user={data.user} />
+        <NavUser user={
+          data ? {
+            name: userData?.user.name ?? "",
+            email: userData?.user.email ?? "",
+            avatar: userData?.user.image ?? "",
+          } : {
+            name: "Guest",
+            email: "",
+            avatar: "",
+          }
+        } />
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>
