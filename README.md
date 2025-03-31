@@ -18,7 +18,4 @@ Narendra Mannan [@narendramannan](https://github.com/narendramannan)
 ## Version History
 * 0.1
     * Initial Release
- 
-## Acknowledgments
- 
-* [Sahin Ahmed - How to Turn Any GitHub Repo into a Conversational AI Assistant](https://medium.com/@sahin.samia/how-to-turn-any-github-repo-into-a-conversational-ai-assistant-c4086739756a)
+  
