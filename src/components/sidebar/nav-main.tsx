@@ -34,14 +34,14 @@ export function NavMain({
 }) {
   return (
     <SidebarGroup>
-      <SidebarGroupLabel>Platform </SidebarGroupLabel>
+      <SidebarGroupLabel className="text-xl mb-4">Platform </SidebarGroupLabel>
       <SidebarMenu> 
         {items.map((item) => (
           <Collapsible
             key={item.title}
             asChild
             defaultOpen={item.isActive}
-            className="group/collapsible"
+            className="group/collapsible my-1"
           >
             <SidebarMenuItem>
               <CollapsibleTrigger asChild onClick={() => {
@@ -50,8 +50,12 @@ export function NavMain({
                 }
               }}>
                 <SidebarMenuButton tooltip={item.title}>
-                  {item.icon && <item.icon />}       
-                  <span>{item.title}</span>   
+                  {item.icon && <item.icon style={{
+                    width: "1.5rem",
+                    height: "1.5rem",
+                    marginRight: "0.5rem",
+                  }} />}       
+                  <span className="text-lg">{item.title}</span>   
                   {item.items?.length && <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />}
                 </SidebarMenuButton>
               </CollapsibleTrigger>
