@@ -1,4 +1,4 @@
-import { Plus, SearchIcon } from "lucide-react"; 
+import { SearchIcon } from "lucide-react"; 
 import { DashboardLayout } from "~/components/layout/DashboardLayout"; 
 import { DataTable } from "~/components/table"; 
 import { Input } from "~/components/ui/input";
