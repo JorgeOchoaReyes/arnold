@@ -55,7 +55,10 @@ export function NavMain({
                     height: "1.5rem",
                     marginRight: "0.5rem",
                   }} />}       
-                  <span className="text-lg">{item.title}</span>   
+                  <span style={{
+                    fontSize: "1.05rem",
+                    fontWeight: "500",
+                  }}>{item.title}</span>   
                   {item.items?.length && <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />}
                 </SidebarMenuButton>
               </CollapsibleTrigger>

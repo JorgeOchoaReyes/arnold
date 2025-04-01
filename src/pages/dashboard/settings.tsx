@@ -1,17 +1,32 @@
 import { DashboardLayout } from "~/components/layout/DashboardLayout"; 
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
+import { ProfileForm } from "~/components/settings/profileForm";
+import { Loader2 } from "lucide-react";
 
 export default function Home(){   
+  const { data: session } = useSession();
+  if (!session) {
+    return <DashboardLayout> 
+      <div className="flex flex-1 items-center justify-center"> <Loader2 className="animate-spin" /> </div>
+    </DashboardLayout>;
+  }
+  
+  if (!session) {
+    redirect("/api/auth/signin");
+  }
   return (
     <DashboardLayout> 
-      <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-        <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-          <div className="aspect-video rounded-xl bg-muted/50" />
-          <div className="aspect-video rounded-xl bg-muted/50" />
-          <div className="aspect-video rounded-xl bg-muted/50" />
-        </div> 
-        <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min"> 
+      <div className="flex flex-1 flex-col gap-4 p-4 pt-0"> 
+        <div className="space-y-6">
+          <div>
+            <h1 className="text-3xl font-bold">Profile</h1>
+            <p className="text-muted-foreground">Update your account information</p>
+          </div>
+          <ProfileForm user={session.user} />
         </div>
       </div>
     </DashboardLayout>
   );
 }; 
+
