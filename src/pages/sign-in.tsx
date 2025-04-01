@@ -1,8 +1,7 @@
 import React, { type ReactNode } from "react";
 import { SiDiscord, SiGithub, SiGoogle } from "react-icons/si";
 import { FiArrowLeft } from "react-icons/fi";
-import { motion } from "framer-motion";
-import { twMerge } from "tailwind-merge";
+import { motion } from "framer-motion"; 
 import { useRouter } from "next/router";
 import { signIn, signOut, useSession } from "next-auth/react"; 
 import { Button } from "~/components/ui/button";

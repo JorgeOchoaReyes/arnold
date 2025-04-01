@@ -1,6 +1,4 @@
-import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
-import { agentRouter } from "./routers/agent";
-import { codeRouter } from "./routers/code_execute";
+import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc"; 
 import { demoRouter } from "./routers/demo";
 import { interviewRouter } from "./routers/interview";
 
@@ -9,9 +7,7 @@ import { interviewRouter } from "./routers/interview";
  *
  * All routers added in /api/routers should be manually added here.
  */
-export const appRouter = createTRPCRouter({
-  agent: agentRouter,
-  code: codeRouter,
+export const appRouter = createTRPCRouter({ 
   demo: demoRouter,
   interview: interviewRouter,
 });

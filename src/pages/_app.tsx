@@ -3,7 +3,7 @@ import { type Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
 import { type AppType } from "next/app";
 import { ThemeProvider } from "~/components/sidebar/theme-provider";  
-
+import { Toaster } from "~/components/ui/toaster";
 import { Analytics } from "@vercel/analytics/react";
 import { api } from "~/utils/api";
 
@@ -24,6 +24,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
         >  
           <div className={GeistSans.className}>
             <Component {...pageProps} />
+            <Toaster />
           </div> 
         </ThemeProvider>
       </SessionProvider> 

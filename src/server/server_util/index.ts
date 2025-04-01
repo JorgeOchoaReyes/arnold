@@ -1,9 +1,6 @@
 import { GoogleGenAI } from "@google/genai";
 
-
-
-export const arnoldDemo = async ({
-  userTranscript,
+export const arnoldDemo = async ({ 
 }: {
     userTranscript: string;
 }) => {

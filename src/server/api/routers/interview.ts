@@ -6,12 +6,9 @@ import {
 } from "~/server/api/trpc";
 
 export const interviewRouter = createTRPCRouter({
-  hello: publicProcedure
+  listInterviews: publicProcedure
     .input(z.object({ text: z.string() }))
     .query(({ input }) => {
-      return {
-        greeting: `Hello ${input.text}`,
-      };
-    }),
- 
+      console.log("input", input);
+    }), 
 });
