@@ -1,5 +1,3 @@
-"use client";
-
 import {
   BadgeCheck, 
   ChevronsUpDown, 
@@ -7,8 +5,7 @@ import {
   Settings,
   Sparkles,
 } from "lucide-react";
-import { signOut } from "next-auth/react";
-
+import { signOut } from "next-auth/react"; 
 import {
   Avatar,
   AvatarFallback,

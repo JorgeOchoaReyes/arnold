@@ -1,6 +1,5 @@
 import { GoogleGenAI } from "@google/genai";
 import { Storage } from "@google-cloud/storage";
-import { error } from "console";
 
 export const arnoldDemo = async ({ 
 }: {
@@ -42,14 +41,12 @@ export const uploadFileToStorage = async (dataUri: string, file_name: string) =>
   try { 
     const fileContents = Buffer.from(matches?.[2] ?? "", "base64");
     if(!fileContents) {
-      return {
-        error: "File contents are empty",
-      };
+      console.log("No file contents found");
+      return null;
     }
     if(fileContents.length > 5 * 1024 * 1024) { 
-      return {
-        error: "File size exceeds 5MB",
-      };
+      console.log("File size exceeds 5MB limit");
+      return null;
     }
     const bucket = gcp_storage.bucket(gpcFilePaths);   
     const file = bucket.file(file_name);
@@ -58,12 +55,52 @@ export const uploadFileToStorage = async (dataUri: string, file_name: string) =>
         contentType: matches?.[1], 
       },
     }); 
-    const pathOfImage = `gs://${gpcFilePaths}/${file_name}`;
-    return pathOfImage;
+    const filePath = `gs://${gpcFilePaths}/${file_name}`;
+    return filePath;
   } catch (error) { 
     console.log("Failed", (error));
-    return {
-      error: "Operation Failed, file not uploaded",
-    };
+    return null;
+  }
+};
+
+export const deleteFileFromStorage = async (file_name: string) => {
+  const credentials = getGcpClientCredentials();
+  const gcp_storage = new Storage(
+    {
+      projectId: credentials.project_id,
+      credentials: credentials,
+    }
+  );  
+  try {  
+    const bucket = gcp_storage.bucket(gpcFilePaths);   
+    const file = bucket.file(file_name);
+    await file.delete(); 
+    return true;
+  } catch (error) {
+    console.log("Failed", (error));
+    return false;
+  }
+};
+
+export const generateSignedUrl = async (file_name: string) => {
+  const credentials = getGcpClientCredentials();
+  const gcp_storage = new Storage(
+    {
+      projectId: credentials.project_id,
+      credentials: credentials,
+    }
+  );  
+  try {  
+    const bucket = gcp_storage.bucket(gpcFilePaths);   
+    const file = bucket.file(file_name); 
+    const [url] = await file.getSignedUrl({
+      version: "v4",
+      action: "read",
+      expires: Date.now() + 30 * 60 * 1000, // 15 minutes
+    }); 
+    return url;
+  } catch (error) {
+    console.log("Failed", (error));
+    return null;
   }
 };

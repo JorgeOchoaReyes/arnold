@@ -5,7 +5,7 @@ import { type AppType } from "next/app";
 import { ThemeProvider } from "~/components/sidebar/theme-provider";  
 import { Toaster } from "~/components/ui/toaster";
 import { Analytics } from "@vercel/analytics/react";
-import { api } from "~/utils/api";
+import { api } from "~/utils/api";  
 
 import "~/styles/globals.css";
 

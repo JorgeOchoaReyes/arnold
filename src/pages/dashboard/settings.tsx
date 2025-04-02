@@ -3,10 +3,13 @@ import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import { ProfileForm } from "~/components/settings/profileForm";
 import { Loader2 } from "lucide-react";
+import { api } from "~/utils/api"; 
 
 export default function Home(){   
   const { data: session } = useSession();
-  if (!session) {
+  const getResumeLink = api.user.getResumeLink.useQuery(); 
+
+  if (!session || getResumeLink.isLoading) {
     return <DashboardLayout> 
       <div className="flex flex-1 items-center justify-center"> <Loader2 className="animate-spin" /> </div>
     </DashboardLayout>;
@@ -23,7 +26,7 @@ export default function Home(){
             <h1 className="text-3xl font-bold">Profile</h1>
             <p className="text-muted-foreground">Update your account information</p>
           </div>
-          <ProfileForm user={session.user} />
+          <ProfileForm user={session.user} resume={getResumeLink.data ?? null} /> 
         </div>
       </div>
     </DashboardLayout>
