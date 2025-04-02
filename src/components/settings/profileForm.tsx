@@ -214,7 +214,7 @@ export const ProfileForm: React.FC<{
                   <div className="grid w-full max-w-sm items-center gap-1.5">
                     <Label htmlFor="resume" >Upload File</Label>
                     <Input 
-                      id="resume" 
+                      id="resume"  
                       ref={resumeFileRef}
                       type="file" 
                       multiple={false} 
