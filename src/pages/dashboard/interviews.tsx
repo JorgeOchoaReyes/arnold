@@ -8,7 +8,7 @@ import { Input } from "~/components/ui/input";
 export default function Home(){   
   return (
     <DashboardLayout> 
-      <div className="flex flex-1 flex-col gap-4 px-10 pt-0">  
+      <div className="flex flex-1 flex-col gap-4 px-10 pt-0 mb-10">  
         <div className="flex flex-row justify-between items-center w-full">  
           <div className="relative flex ml-4">
             <Input placeholder="Search..." className="w-[300px] rounded-full bg-secondary p-5"  />

@@ -7,11 +7,12 @@ import {
   SidebarMenuItem, 
 } from "~/components/ui/sidebar";
 import { useTheme } from "next-themes";
+import { useHydrate } from "~/hooks/use-hydrate";
 
 export function TeamSwitcher() { 
   const { systemTheme, theme } = useTheme(); 
-  const isDark = theme === "system" ? systemTheme === "dark" : theme === "dark";
-  const isLight = theme === "system" ? systemTheme === "light" : theme === "light";
+  const hydrated = useHydrate();   
+
   return (
     <SidebarMenu>
       <SidebarMenuItem> 
@@ -38,9 +39,10 @@ export function TeamSwitcher() {
                 </svg> 
               </div>   
               <svg width="150" height="50" viewBox="0 0 220 70" fill="none" xmlns="http://www.w3.org/2000/svg"> 
-                <text x="20" y="50" fontFamily="Verdana, sans-serif" fontSize="45" fontWeight="bold" fill={
-                  isDark ? "white" : isLight ? "black" : "black"
-                }>Arnold</text>   
+                {hydrated && <text x="20" y="50" fontFamily="Verdana, sans-serif" fontSize="45" fontWeight="bold" fill={
+                  (theme === "system" ? systemTheme === "dark" : theme === "dark") ? "white" : 
+                    (theme === "system" ? systemTheme === "light" : theme === "light") ? "black" : "white"
+                }>Arnold</text>   }
               </svg>      
             </div>
           </div>
