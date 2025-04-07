@@ -1,4 +1,5 @@
 import React from "react"; 
+import PdfWindow from "~/components/interview/pdfWindow";
 import { DashboardLayout } from "~/components/layout/DashboardLayout";
 
 const testFeature = {
@@ -30,6 +31,7 @@ export default function InterviewPage () {
         <h1>
           {testFeature.name}
         </h1>
+        <PdfWindow />
       </div>
     </DashboardLayout>
   );

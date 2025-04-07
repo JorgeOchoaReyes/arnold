@@ -27,8 +27,8 @@ export default function useDemo() {
   }), []); 
   const [countDown, setCountDown] = React.useState(60);
   const [loadingResults, setLoadingResults] = React.useState(false);
-  const [callVapi, setCallVapi] = React.useState<Call | null>(null); 
-  
+  const [callVapi, setCallVapi] = React.useState<Call | null>(null);  
+
   const startWebCall = async () => {   
     if(callOnGoing.current) {
       alert("Call is already in progress. Please end the call before starting a new one.");
@@ -43,7 +43,7 @@ export default function useDemo() {
       variableValues: {
         attitude: interviewer?.description
       }, 
-    });
+    }); 
     setCallVapi(startCall); 
     callOnGoing.current = true; 
     setLatestCallId(startCall?.id ?? "");    
