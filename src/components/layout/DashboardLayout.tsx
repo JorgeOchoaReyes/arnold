@@ -4,9 +4,10 @@ import { PagePath } from "./page-path";
 
 export const DashboardLayout: React.FC<{
     children: React.ReactNode;
-}> = ({ children }) => {
+    open?: boolean;
+}> = ({ children, open }) => {
   return <SidebarProvider>
-    <AppSidebar />
+    <AppSidebar open={open} />
     <SidebarInset> 
       <PagePath />
       {children}

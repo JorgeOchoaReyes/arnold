@@ -16,15 +16,16 @@ import {
   SidebarFooter,
   SidebarHeader,
   SidebarRail,
+  useSidebar,
 } from "~/components/ui/sidebar"; 
 import { useSession } from "next-auth/react"; 
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar> & { open?: boolean }) {
   const { data: userData } = useSession();
-
+  const {setOpen} = useSidebar();
   const data = {
     user: {
-      name: "shadcn",
+      name: "Arnold",
       email: "m@example.com",
       avatar: "/avatars/shadcn.jpg",
     },
@@ -52,6 +53,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       },
     ], 
   };
+  
+  const setOpenOnFirstRender = React.useRef(false); 
+  React.useEffect(() => {
+    if (props.open && !setOpenOnFirstRender.current) {
+      setOpen(true);
+      setOpenOnFirstRender.current = true;
+    }  
+  }, [setOpen]);
 
   return (
     <Sidebar collapsible="icon" {...props}>

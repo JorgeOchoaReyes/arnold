@@ -21,7 +21,7 @@ export default function Home(){
         </div>
         <div className="flex flex-col gap-4 pt-10 ml-2"> 
           <h2 className="text-3xl leading-tight font-med text-pretty"> Featured Interviews </h2>
-          <div className="flex flex-row gap-8 pt-4 flex-wrap w-[70%]"> 
+          <div className="flex flex-row gap-8 pt-4 flex-wrap w-[80%]"> 
             {
               new Array(8).fill(0).map((_, i) => (
                 <Featured key={i} />

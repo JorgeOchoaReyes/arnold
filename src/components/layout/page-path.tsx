@@ -23,13 +23,15 @@ export const PagePath = () => {
           <BreadcrumbList>
             {
               pathArray.map((item, index) => {
-                const isLast = index === pathArray.length - 1;
+                if(item === "[id]") return null;  
+                let isLast = index === pathArray.length - 1;
+                isLast =  pathArray[index + 1] === "[id]";
                 const href = "/" + pathArray.slice(0, index + 1).join("/");
                 return (
                   <BreadcrumbItem key={item} className={isLast ? "font-bold" : ""}>
                     <BreadcrumbLink href={isLast ? undefined : href} className="text-muted-foreground hover:text-primary hover:underline">
                       {item.toUpperCase()}
-                    </BreadcrumbLink>
+                    </BreadcrumbLink> 
                     {!isLast && <BreadcrumbSeparator />}
                   </BreadcrumbItem>
                 );
