@@ -1,6 +1,6 @@
 import React from "react"; 
-import { Card } from "../ui/card";
-import { type object } from "zod";
+import { Card } from "../ui/card"; 
+import { useRouter } from "next/router";
 
 const testFeature = {
   "id": "test-1",
@@ -43,7 +43,8 @@ const contrastColor = (hex: string) => {
 };
 
 export const Featured = () => {
-  return <div className="relative hover:scale-[1.1] transition-all">  
+  const router = useRouter();
+  return <div className="relative hover:scale-[1.1] transition-all" onClick={async () => {await router.push(`/dashboard/interviews/${testFeature.id}`);}}>  
     <Card  
       style={{ 
         position: "relative",
