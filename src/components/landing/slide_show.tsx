@@ -21,7 +21,7 @@ export const SlideShow = () => {
       <Carousel
         plugins={[
           Autoplay({
-            delay: 1500,
+            delay: 1000,  
           }),
         ]}
         opts={{

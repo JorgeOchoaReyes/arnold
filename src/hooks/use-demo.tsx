@@ -47,8 +47,7 @@ export default function useDemo() {
     setCallVapi(startCall); 
     callOnGoing.current = true; 
     setLatestCallId(startCall?.id ?? "");    
-    setTimeout(() => {
-      console.log(callOnGoing.current, startCall?.id);
+    setTimeout(() => { 
       if(callOnGoing.current) {
         endWebCall(startCall?.id).then().catch((error) => {
           console.error("Error ending call:", error); 
@@ -67,15 +66,25 @@ export default function useDemo() {
   const retrieveDetailsEndOfCall = async (id: string) => {
     if(!id) { 
       console.error("No call ID found.", latestCallId);
+      alert("No call ID found. Please try again.");
       return;
     }
     setLoadingResults(true); 
-    await sleep(5000); // Delay for the call to be processed
-    const callDetails = await retrieveCallSummary.mutateAsync({ callId: id ?? "" });
-    if(!callDetails) { 
-      setLoadingResults(false); 
-      return;
-    }
+
+    let callDetails = await retrieveCallSummary.mutateAsync({ callId: id }); 
+    if(callDetails.summary === "" || callDetails.summary === undefined) {  
+      for(let i = 1; i <= 3; i++) {
+        await sleep(1000 * i); // Delay for the call to be processed
+        console.log("Waiting for call to be processed...", i*1000,);
+        callDetails = await retrieveCallSummary.mutateAsync({ callId: id ?? "" });
+        if(callDetails.summary !== "" && callDetails.summary !== undefined) break; 
+      }
+      if(!callDetails) { 
+        setLoadingResults(false);  
+        return;
+      }
+    } 
+
     setResultsOfLatestCall({
       id: callDetails.id,
       summary: callDetails.summary ?? "",
