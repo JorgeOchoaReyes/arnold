@@ -1,0 +1,21 @@
+{
+    "id": "test-1",
+    "name": "Amazon",
+    "description": "Amazon is an American multinational technology company that focuses on e-commerce, cloud computing, digital streaming, and artificial intelligence. It is one of the Big Five companies in the U.S. information technology industry, along with Google, Apple, Microsoft, and Facebook.",
+    "duration": "20-30 minutes",
+    "characteristics": [
+        "Hard",
+        "Technical Focused",
+        "Foundations",
+        "Neutral Feedback"
+    ],
+    "companySimilarTo": [
+        "Google",
+        "Microsoft",
+        "Apple"
+    ],
+    "interviewType": "Technical",
+    "botIconUrl": "/aggressive.png",
+    "vapiBotId": "test-1",
+    "backgroundUrl": "https://images.unsplash.com/photo-1704204656144-3dd12c110dd8?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8YW1hem9uJTIwd2Vic2l0ZXxlbnwwfHwwfHx8MA%3D%3D" 
+}

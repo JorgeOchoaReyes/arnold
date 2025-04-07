@@ -79,6 +79,7 @@ model Interview {
     interviewType       String  // Types: Technical, Behavioral, System Design 
     botIconUrl          String?
     vapiBotId           String
+    backgroundUrl       String?
 }
 
 model InterviewRecord {

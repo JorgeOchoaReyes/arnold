@@ -5,8 +5,7 @@ import {
   flexRender,
   getCoreRowModel,
   useReactTable,
-} from "@tanstack/react-table";
-
+} from "@tanstack/react-table"; 
 import {
   Table,
   TableBody,
@@ -58,7 +57,7 @@ export function DataTable<TData, TValue>({
               <TableRow
                 key={row.id}
                 data-state={row.getIsSelected() && "selected"}
-                className={`cursor-pointer hover:bg-[#e7ecff] py-10 transition-all hover:text-black text-pretty ${index % 2 === 0 ? "bg-[#1e293b]" : ""}`}
+                className={`cursor-pointer hover:bg-[#e7ecff] py-10 transition-all hover:text-black text-pretty ${index % 2 === 0 ? "bg-secondary" : ""}`}
               >
                 {row.getVisibleCells().map((cell) => (
                   <TableCell key={cell.id}>
