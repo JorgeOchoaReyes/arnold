@@ -1,6 +1,7 @@
 import React from "react"; 
 import PdfWindow from "~/components/interview/pdfWindow";
 import { DashboardLayout } from "~/components/layout/DashboardLayout";
+import { ResizableDiv } from "~/components/layout/resizeable";
 
 const testFeature = {
   "id": "test-1",
@@ -31,7 +32,12 @@ export default function InterviewPage () {
         <h1>
           {testFeature.name}
         </h1>
-        <PdfWindow />
+        <div style={{
+          height: 600,
+          width: 800,
+        }} className="flex flex-col items-center justify-center bg-background border-2 border-[#1a1a1a] rounded-lg"> 
+          <PdfWindow /> 
+        </div>
       </div>
     </DashboardLayout>
   );

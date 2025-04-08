@@ -5,7 +5,7 @@ import { Mock_Interviewers } from "~/utils/constants";
 import { useDemoStore } from "./use-store";
 import { api } from "~/utils/api";
 import { type Call } from "@vapi-ai/web/dist/api";
-import { sleep } from "@trpc/server/unstable-core-do-not-import";
+import { sleep } from "@trpc/server/unstable-core-do-not-import"; 
 
 export default function useDemo() {
   if(!process.env.NEXT_PUBLIC_PUBLIC_VAPI_API || process.env.NEXT_PUBLIC_ASSISTANT_ID === "") {
@@ -20,14 +20,14 @@ export default function useDemo() {
     setResultsOfLatestCall,
     latestCallId,
     resultsOfLatestCall,
-  } = useDemoStore();  
-  const callOnGoing = useRef(false);
+  } = useDemoStore();    
+  const callOnGoing = useRef(false); 
   const vapi = React.useMemo(() => new Vapi(process.env.NEXT_PUBLIC_PUBLIC_VAPI_API ?? "", undefined, {
     alwaysIncludeMicInPermissionPrompt: true,
   }), []); 
   const [countDown, setCountDown] = React.useState(60);
   const [loadingResults, setLoadingResults] = React.useState(false);
-  const [callVapi, setCallVapi] = React.useState<Call | null>(null);  
+  const [callVapi, setCallVapi] = React.useState<Call | null>(null);   
 
   const startWebCall = async () => {   
     if(callOnGoing.current) {
@@ -90,7 +90,7 @@ export default function useDemo() {
       summary: callDetails.summary ?? "",
     }); 
     setLoadingResults(false); 
-  }; 
+  };  
 
   React.useEffect(() => {
     if(callOnGoing.current) {
@@ -113,6 +113,6 @@ export default function useDemo() {
     resultsOfLatestCall,
     countDown,
     loading: (loadingResults || retrieveCallSummary.isPending),
-    callVapi,
+    callVapi, 
   }; 
 }

@@ -45,7 +45,7 @@ export const DemoDialog: React.FC<{
     setCallOnGoing,
     resultsOfLatestCall,
     countDown,
-    loading,
+    loading,  
   } = useDemo(); 
 
   return <Dialog open={open} onOpenChange={(open) => {
@@ -119,7 +119,7 @@ export const DemoDialog: React.FC<{
                 <Typewriter 
                   text={initialMessage}
                   speed={10}
-                  delay={100}
+                  delay={1}
                   onComplete={() => {
                     console.log("Done");
                   }}

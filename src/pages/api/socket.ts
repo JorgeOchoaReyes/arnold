@@ -21,6 +21,7 @@ export const arnoldDemo = async ({
 };
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  res.end();
   const wss  = new WebSocketServer({
     noServer: true
   });

@@ -5,9 +5,9 @@ import { Mock_Interviewers } from "~/utils/constants";
 import { useDemoStore } from "./use-store";
 import { api } from "~/utils/api";
 import { type Call } from "@vapi-ai/web/dist/api";
-import { sleep } from "@trpc/server/unstable-core-do-not-import";
+import { sleep } from "@trpc/server/unstable-core-do-not-import"; 
 
-export default function useInterviewer() {
+export default function useDemo() {
   if(!process.env.NEXT_PUBLIC_PUBLIC_VAPI_API || process.env.NEXT_PUBLIC_ASSISTANT_ID === "") {
     throw new Error("[ERROR]: VAPI_API_KEY not found or assistant not found");
   }
@@ -16,19 +16,22 @@ export default function useInterviewer() {
   const {
     incrementNumberOfCalls,
     numberOfCalls,
-    setLatestCallId, 
+    setLatestCallId,
     setResultsOfLatestCall,
     latestCallId,
     resultsOfLatestCall,
   } = useDemoStore();  
+  const [transcript, setTranscript] = React.useState<string>(""); 
+  const [assistantIsSpeaking, setAssistantIsSpeaking] = React.useState(false);
+  const [listOfAllTranscripts, setListOfAllTranscripts] = React.useState<string[]>([]);
   const callOnGoing = useRef(false);
   const vapi = React.useMemo(() => new Vapi(process.env.NEXT_PUBLIC_PUBLIC_VAPI_API ?? "", undefined, {
     alwaysIncludeMicInPermissionPrompt: true,
   }), []); 
   const [countDown, setCountDown] = React.useState(60);
   const [loadingResults, setLoadingResults] = React.useState(false);
-  const [callVapi, setCallVapi] = React.useState<Call | null>(null); 
-  
+  const [callVapi, setCallVapi] = React.useState<Call | null>(null);   
+
   const startWebCall = async () => {   
     if(callOnGoing.current) {
       alert("Call is already in progress. Please end the call before starting a new one.");
@@ -43,8 +46,9 @@ export default function useInterviewer() {
       variableValues: {
         attitude: interviewer?.description
       }, 
-    });
-    setCallVapi(startCall); 
+    }); 
+    setCallVapi(startCall);  
+
     callOnGoing.current = true; 
     setLatestCallId(startCall?.id ?? "");    
     setTimeout(() => { 
@@ -100,8 +104,36 @@ export default function useInterviewer() {
         setCountDown(60);
       }
       return () => clearInterval(interval);
-    } 
+    }
   }, [callOnGoing.current, callOnGoing.current]);
+
+  React.useEffect(() => { 
+    vapi.on("speech-start", () => {
+      setAssistantIsSpeaking(true);
+    }); 
+    vapi.on("speech-end", () => {
+      setAssistantIsSpeaking(false);
+      setTranscript(listOfAllTranscripts.join(" "));
+    }); 
+    vapi.on("message", (message: {
+      type: string;
+      transcript: string;
+      audio: string;
+      transcriptType: string;
+      role: string;
+    }) => {
+      console.log(message);
+      if(message.type === "transcript" && message.transcriptType === "final" && message.role === "assistant") {
+        listOfAllTranscripts.push(message.transcript);
+      }
+    }); 
+
+    return () => {
+      vapi.stop();
+    };
+
+  }, []);
+ 
 
   return {
     startWebCall,
@@ -114,5 +146,6 @@ export default function useInterviewer() {
     countDown,
     loading: (loadingResults || retrieveCallSummary.isPending),
     callVapi,
+    transcript
   }; 
 }
