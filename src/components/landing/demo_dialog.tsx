@@ -19,7 +19,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select"; 
-import { Mock_Interviewers } from "~/utils/constants";
+import { Mock_Interviewers } from "~/utils/help";
 import {
   Avatar,
   AvatarFallback,

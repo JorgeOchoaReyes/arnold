@@ -7,7 +7,7 @@ import {
   CarouselPrevious,
 } from "../ui/carousel"; 
 import Autoplay from "embla-carousel-autoplay"; 
-import { Mock_Interviewers } from "~/utils/constants";
+import { Mock_Interviewers } from "~/utils/help";
 import {
   Avatar,
   AvatarFallback,

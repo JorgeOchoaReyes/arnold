@@ -1,11 +1,37 @@
 import { Plus, SearchIcon } from "lucide-react";
 import { Featured } from "~/components/interview/featured";
+import { InterviewDialog } from "~/components/interview/interview-details-dialog";
 import { DashboardLayout } from "~/components/layout/DashboardLayout"; 
 import { DataTable } from "~/components/table";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
+import React from "react";  
 
-export default function Home(){   
+const testFeature = {
+  "id": "test-1",
+  "name": "Amazon Technical Interview",
+  "description": "Amazon Technical Interview focused on data structures and algorithms.",
+  "duration": "20-30 minutes",
+  "characteristics": [
+    "Hard",
+    "Technical Focused",
+    "Foundations",
+    "Neutral Feedback"
+  ],
+  "companySimilarTo": [
+    "Google",
+    "Microsoft",
+    "Apple"
+  ],
+  "interviewType": "Technical",
+  "botIconUrl": "/aggresive.svg",
+  "vapiBotId": "test-1",
+  "backgroundUrl": "https://images.unsplash.com/photo-1704204656144-3dd12c110dd8?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8YW1hem9uJTIwd2Vic2l0ZXxlbnwwfHwwfHx8MA%3D%3D",
+};
+
+export default function Home(){ 
+  const [interviewDetailsModal, setInterviewDetailsModal] = React.useState<boolean>(false);
+
   return (
     <DashboardLayout> 
       <div className="flex flex-1 flex-col gap-4 px-10 pt-0 mb-10">  
@@ -23,8 +49,13 @@ export default function Home(){
           <h2 className="text-3xl leading-tight font-med text-pretty"> Featured Interviews </h2>
           <div className="flex flex-row gap-8 pt-4 flex-wrap w-[80%]"> 
             {
-              new Array(8).fill(0).map((_, i) => (
-                <Featured key={i} />
+              new Array(8).fill(0).map((_, i) => (  
+                <Featured 
+                  key={i}
+                  onClick={() => {
+                    setInterviewDetailsModal(true); 
+                  }}
+                /> 
               ))
             } 
           </div> 
@@ -100,6 +131,11 @@ export default function Home(){
           </div>
         </div>
       </div>
+      <InterviewDialog 
+        interviewDetails={testFeature}
+        open={interviewDetailsModal} 
+        setOpen={setInterviewDetailsModal} 
+      />
     </DashboardLayout>
   );
 }; 

@@ -76,7 +76,7 @@ model Interview {
     duration            String    
     characteristics     String[]
     companySimilarTo    String[]
-    interviewType       String  // Types: Technical, Behavioral, System Design 
+    interviewType       String  // Types: technical, behavioral, system_design 
     botIconUrl          String?
     vapiBotId           String
     backgroundUrl       String?
@@ -86,7 +86,8 @@ model InterviewRecord {
     id                  String   @id @default(cuid())
     interviewId         String
     vapiBotId           String
-    status              String  // Types: Scheduled, Completed, Cancelled, Rescheduled   
+    status              String  // Types: Scheduled, Completed, Cancelled, Rescheduled
+    interviewType       String      @default("behavioral")// Types: technical, behavioral, system_design    
     startTime           DateTime?
     endTime             DateTime?
     feedback            String?   
@@ -101,3 +102,4 @@ model InterviewRecord {
     userId              String
     user                User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
+
