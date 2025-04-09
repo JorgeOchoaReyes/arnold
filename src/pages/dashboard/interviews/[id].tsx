@@ -1,6 +1,8 @@
 import React from "react"; 
+import { FadeIn } from "~/components/animation/fade-in";
+import { Notepad } from "~/components/interview/notepad";
 import PdfWindow from "~/components/interview/pdfWindow";
-import { DashboardLayout } from "~/components/layout/DashboardLayout";
+import { DashboardLayout } from "~/components/layout/DashboardLayout"; 
 
 const testFeature = {
   "id": "test-1",
@@ -25,13 +27,28 @@ const testFeature = {
 };
 
 export default function InterviewPage () {
+  const [notes, setNotes] = React.useState<string>("");
+
   return (
     <DashboardLayout open={false}>
       <div className="flex flex-1 flex-col gap-4 px-10 pt-0 mb-10">
         <h1>
           {testFeature.name}
         </h1>
-        <PdfWindow />
+        <FadeIn className="flex flex-row gap-4 w-full"> 
+          <div style={{
+            height: 600,
+            width: "50%",
+          }} className="flex flex-col items-center justify-center bg-background border-2 border-[#1a1a1a] rounded-lg"> 
+            <PdfWindow /> 
+          </div> 
+          <div style={{
+            height: 600,
+            width: "50%",
+          }} className="flex flex-col items-center justify-center bg-background border-2 border-[#1a1a1a] rounded-lg"> 
+            <Notepad text={notes} setText={setNotes} /> 
+          </div> 
+        </FadeIn>
       </div>
     </DashboardLayout>
   );
