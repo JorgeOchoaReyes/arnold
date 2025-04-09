@@ -66,3 +66,43 @@ export const Mock_Interviewers = [
     src: "/helpful.svg",
   },
 ];
+
+export const coloring = {
+  "hard": "#ff0000",
+  "medium": "#ff9900",  
+  "easy": "#00ff00",
+  "technical focused": "#0000ff",
+  "behavioral": "#ff00ff",
+  "foundations": "#00ffff",
+  "neutral feedback": "#ffff00",
+};
+
+export const companyColorsAndIcons = {
+  "Google": {
+    color: "#4285F4",
+    icon: "google",
+  },
+  "Microsoft": {
+    color: "#F25022", 
+  },
+  "Apple": {
+    color: "#A2AAAD", 
+  },
+  "Amazon": {
+    color: "#FF9900", 
+  },
+  "Meta": {
+    color: "#4267B2", 
+  },
+  "Apple": {
+    color: "#A2AAAD", 
+  },
+};
+ 
+export const contrastColor = (hex: string) => {
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+  return brightness > 128 ? "#000000" : "#ffffff";
+};
