@@ -18,7 +18,7 @@ const testFeature = {
     "Microsoft",
     "Apple"
   ],
-  "interviewType": "Technical",
+  "interviewType": "technical",
   "botIconUrl": "/aggresive.svg",
   "vapiBotId": "test-1",
   "backgroundUrl": "https://images.unsplash.com/photo-1704204656144-3dd12c110dd8?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8YW1hem9uJTIwd2Vic2l0ZXxlbnwwfHwwfHx8MA%3D%3D" 

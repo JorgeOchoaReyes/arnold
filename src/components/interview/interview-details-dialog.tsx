@@ -11,6 +11,9 @@ import { Typewriter } from "../text/typewriter";
 import { Avatar, AvatarImage } from "@radix-ui/react-avatar";
 import { coloring, contrastColor, companyColorsAndIcons } from "~/utils/help";
 import { Button } from "../ui/button";
+import { api } from "~/utils/api";
+import { useRouter } from "next/router";
+import { Loader2 } from "lucide-react";
 
 export const InterviewDialog: React.FC<{
     open: boolean, 
@@ -21,6 +24,24 @@ export const InterviewDialog: React.FC<{
   setOpen,
   interviewDetails
 }) => {  
+  const createinterview = api.interview.startInterviewRecord.useMutation();
+  const router = useRouter();
+
+  const startInterview = async () => {
+    if(!interviewDetails) {
+      alert("No interview details found");
+      return;
+    }
+    const interviewId = await createinterview.mutateAsync({
+      interview: interviewDetails,
+    });
+    if(interviewId) { 
+      setOpen(false); 
+      await router.push(`/dashboard/interviews/${interviewId}`);
+    } else {
+      alert("Error starting interview");
+    }
+  };
 
   return <Dialog   
     open={open}
@@ -31,7 +52,7 @@ export const InterviewDialog: React.FC<{
     <DialogContent className={"sm:max-w-[500px] rounded-lg [&>button]:hidden transition-all duration-75 ease-in-out"}>
       <DialogHeader >
         <DialogTitle className="flex flex-row items-center justify-center w-full gap-5">
-          <p className="text-center text-2xl font-medium "> {interviewDetails?.name ?? "Interview Details"}</p>                  
+          <p className="text-center text-2xl font-medium text-white"> {interviewDetails?.name ?? "Interview Details"}</p>                  
           <Avatar className="w-10 h-auto mb-3">
             <AvatarImage src={interviewDetails?.botIconUrl ?? ""} alt={interviewDetails?.name} /> 
           </Avatar>
@@ -88,8 +109,8 @@ export const InterviewDialog: React.FC<{
           <Button variant={"destructive"} onClick={() => setOpen(false)} className="bg-red-500 hover:bg-red-600 text-white">
             Cancel
           </Button>
-          <Button> 
-            Start Interview! 🚀
+          <Button onClick={startInterview} className=""> 
+            {!createinterview.isPending ? "Start Interview! 🚀" : <Loader2 className="animate-spin" />}
           </Button>
         </div>
       </div> 
