@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
 import React, { useRef } from "react"; 
 import Vapi from "@vapi-ai/web";
-import { Mock_Interviewers } from "~/utils/constants";
+import { Mock_Interviewers } from "~/utils/help";
 import { useDemoStore } from "./use-store";
 import { api } from "~/utils/api";
 import { type Call } from "@vapi-ai/web/dist/api";

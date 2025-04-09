@@ -9,7 +9,8 @@ import {
 import { type Interview } from "@prisma/client";
 import { Typewriter } from "../text/typewriter";  
 import { Avatar, AvatarImage } from "@radix-ui/react-avatar";
-import { coloring, contrastColor, companyColorsAndIcons } from "~/utils/constants";
+import { coloring, contrastColor, companyColorsAndIcons } from "~/utils/help";
+import { Button } from "../ui/button";
 
 export const InterviewDialog: React.FC<{
     open: boolean, 
@@ -40,14 +41,12 @@ export const InterviewDialog: React.FC<{
           <div className="flex flex-col items-start justify-center my-2"> 
             <p className="text-sm pb-3 text-muted-foreground text-center w-[90%] flex flex-wrap"> 
             Characteristsics
-            </p>
-            <div className="flex flex-col items-center justify-center w-[80%]">  
-              <Typewriter
-                text={interviewDetails?.description ?? "Interview Details"}
-                speed={10} 
-                className="text-white"
-              />
-            </div> 
+            </p>  
+            <Typewriter
+              text={interviewDetails?.description ?? "Interview Details"}
+              speed={10} 
+              className="text-white"
+            /> 
           </div>
         </DialogDescription>
       </DialogHeader>
@@ -83,6 +82,15 @@ export const InterviewDialog: React.FC<{
                 className={"text-[12px] text-pretty rounded-full font-semibold px-2 py-1"}>{company}</span>; 
             })
           }
+        </div>
+        <hr /> 
+        <div className="flex flex-row gap-2 pt-2 pb-2 flex-wrap w-[90%] justify-end"> 
+          <Button variant={"destructive"} onClick={() => setOpen(false)} className="bg-red-500 hover:bg-red-600 text-white">
+            Cancel
+          </Button>
+          <Button> 
+            Start Interview! 🚀
+          </Button>
         </div>
       </div> 
     </DialogContent>

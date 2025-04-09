@@ -93,10 +93,7 @@ export const companyColorsAndIcons = {
   },
   "Meta": {
     color: "#4267B2", 
-  },
-  "Apple": {
-    color: "#A2AAAD", 
-  },
+  }, 
 };
  
 export const contrastColor = (hex: string) => {

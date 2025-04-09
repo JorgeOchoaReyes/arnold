@@ -1,6 +1,6 @@
 import React from "react"; 
 import { Card } from "../ui/card";   
-import { coloring, contrastColor } from "~/utils/constants";
+import { coloring, contrastColor } from "~/utils/help";
 
 const testFeature = {
   "id": "test-1",
