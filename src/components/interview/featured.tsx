@@ -52,7 +52,7 @@ export const Featured: React.FC<{
                 backgroundColor: bgColor,
                 color: contrastColor(bgColor),
               }}
-              className={"text-[10px] text-pretty rounded-full font-bold px-1 py-1"}>{characteristic} </span>; 
+              className={"text-[10px] text-pretty rounded-full border-2 px-1 py-1"}>{characteristic} </span>; 
           })
         }
       </div>

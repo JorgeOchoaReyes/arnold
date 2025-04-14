@@ -1,54 +1,71 @@
 import React from "react"; 
 import { FadeIn } from "~/components/animation/fade-in";
+import { SlideIn } from "~/components/animation/slide-int";
+import { CallControl } from "~/components/interview/call-control";
 import { Notepad } from "~/components/interview/notepad";
 import PdfWindow from "~/components/interview/pdfWindow";
 import { DashboardLayout } from "~/components/layout/DashboardLayout"; 
-
-const testFeature = {
-  "id": "test-1",
-  "name": "Amazon Technical Interview",
-  "description": "Amazon Technical Interview focused on data structures and algorithms.",
-  "duration": "20-30 minutes",
-  "characteristics": [
-    "Hard",
-    "Technical Focused",
-    "Foundations",
-    "Neutral Feedback"
-  ],
-  "companySimilarTo": [
-    "Google",
-    "Microsoft",
-    "Apple"
-  ],
-  "interviewType": "Technical",
-  "botIconUrl": "/aggresive.svg",
-  "vapiBotId": "test-1",
-  "backgroundUrl": "https://images.unsplash.com/photo-1704204656144-3dd12c110dd8?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8YW1hem9uJTIwd2Vic2l0ZXxlbnwwfHwwfHx8MA%3D%3D",
-};
+import useInterview from "~/hooks/use-interview";
+import { useRouter } from "next/router";
+import { Loader2 } from "lucide-react";
 
 export default function InterviewPage () {
-  const [notes, setNotes] = React.useState<string>("");
+  const router = useRouter();
+  const {
+    usersNotes, 
+    callOnGoing,
+    loadingDetails, 
+    callDetails,
+    mute, 
+    inteviewerSpeaking,
+    volume,
+    setUsersNotes,
+    toggleMute, 
+    startWebCall,
+    endWebCall,
+    setCallVolumeCall,
+  } = useInterview(router.query.id as string); 
 
   return (
     <DashboardLayout open={false}>
       <div className="flex flex-1 flex-col gap-4 px-10 pt-0 mb-10">
         <h1>
-          {testFeature.name}
+          {callDetails?.name}
         </h1>
-        <FadeIn className="flex flex-row gap-4 w-full"> 
-          <div style={{
-            height: 600,
-            width: "50%",
-          }} className="flex flex-col items-center justify-center bg-background border-2 border-[#1a1a1a] rounded-lg"> 
-            <PdfWindow /> 
-          </div> 
-          <div style={{
-            height: 600,
-            width: "50%",
-          }} className="flex flex-col items-center justify-center bg-background border-2 border-[#1a1a1a] rounded-lg"> 
-            <Notepad text={notes} setText={setNotes} /> 
-          </div> 
-        </FadeIn>
+        {
+          loadingDetails ? 
+            <div className="flex w-full justify-center items-center h-[80vh]"> 
+              <Loader2 className="animate-spin" />
+            </div> :
+            <>
+              <FadeIn className="flex flex-row gap-4 w-full"> 
+                <div style={{
+                  height: 600,
+                  width: "50%",
+                }} className="flex flex-col items-center justify-center bg-background border-2 border-[#1a1a1a] rounded-lg"> 
+                  <PdfWindow /> 
+                </div> 
+                <div style={{
+                  height: 600,
+                  width: "50%",
+                }} className="flex flex-col items-center justify-center bg-background border-2 border-[#1a1a1a] rounded-lg"> 
+                  <Notepad text={usersNotes} setText={setUsersNotes} /> 
+                </div> 
+              </FadeIn>
+              <SlideIn direction="up"> 
+                <CallControl 
+                  callOnGoing={callOnGoing}
+                  callerTalking={inteviewerSpeaking ?? false}
+                  mute={mute}
+                  volume={volume}
+                  onClickMute={toggleMute}
+                  onClickStart={startWebCall}
+                  onClickEnd={endWebCall}
+                  onChangeVolume={setCallVolumeCall}
+                /> 
+              </SlideIn>
+            </>
+        } 
       </div>
     </DashboardLayout>
   );

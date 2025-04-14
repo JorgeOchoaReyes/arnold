@@ -84,7 +84,7 @@ export const InterviewDialog: React.FC<{
                   backgroundColor: bgColor,
                   color: contrastColor(bgColor),
                 }}
-                className={"text-[12px] text-pretty rounded-full font-semibold px-2 py-1"}>{characteristic}</span>; 
+                className={"text-[12px] text-pretty rounded-full  px-2 py-1"}>{characteristic}</span>; 
             })
           }
         </div>
