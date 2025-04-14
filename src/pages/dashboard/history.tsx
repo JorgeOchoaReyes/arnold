@@ -3,9 +3,11 @@ import { DashboardLayout } from "~/components/layout/DashboardLayout";
 import { DataTable } from "~/components/table"; 
 import { Input } from "~/components/ui/input";
 import { api } from "~/utils/api";
+import { useRouter } from "next/router";
 
 export default function Home(){   
   const records = api.interview.getInterviewRecords.useQuery();
+  const router = useRouter();
 
   return (
     <DashboardLayout> 
@@ -27,10 +29,18 @@ export default function Home(){
                 records.isError ?
                   <div className="text-red-500">Error loading records</div> : 
                   <DataTable
-                    columns={[
+                    columns={[ 
                       { accessorKey: "name", header: "Interview" }, 
                       { accessorKey: "date", header: "Focus" }, 
                     ]}
+                    onClickRow={async (rowId) => {
+                      const findedRecord = records.data?.find((r) => r.id === rowId);
+                      if (findedRecord) { 
+                        await router.push(`/dashboard/interviews/${findedRecord.id}`); 
+                      } else {
+                        alert("Record not found");
+                      }
+                    }}
                     data={records?.data?.map((r) => {
                       return {
                         id: r.id, 

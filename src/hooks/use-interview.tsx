@@ -13,9 +13,8 @@ export default function useInterview(interviewerId: string) {
   }); 
   const [usersNotes, setUsersNotes] = React.useState<string>(""); 
   const callOnGoing = useRef(false);
-  const vapi = React.useMemo(() => new Vapi(process.env.NEXT_PUBLIC_PUBLIC_VAPI_API ?? "", undefined, {
-    alwaysIncludeMicInPermissionPrompt: true,
-  }), []); 
+  const apiKey = process.env.NEXT_PUBLIC_PUBLIC_VAPI_API ?? "";
+  const vapi = React.useMemo(() => new Vapi(apiKey, undefined, {alwaysIncludeMicInPermissionPrompt: true}), []); 
   const [callVapi, setCallVapi] = React.useState<Call | null>(null);  
   const [inteviewerSpeaking, setInterviewerSpeaking] = React.useState(false); 
   const [volume, setVolume] = React.useState(1);
@@ -33,14 +32,7 @@ export default function useInterview(interviewerId: string) {
       }, 
     }); 
     setCallVapi(startCall);   
-    callOnGoing.current = true;  
-    // setTimeout(() => { 
-    //   if(callOnGoing.current) {
-    //     endWebCall().then().catch((error) => {
-    //       console.error("Error ending call:", error); 
-    //     });
-    //   }
-    // }, 60000); 
+    callOnGoing.current = true;   
   }; 
 
   const toggleMute = async () => { 

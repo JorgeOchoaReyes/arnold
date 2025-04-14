@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { type InterviewRecord } from "@prisma/client";
 import { z } from "zod"; 
 import {
@@ -79,6 +80,23 @@ export const interviewRouter = createTRPCRouter({
         }
       } catch (error) {
         console.error("Error checking existing record:", error);
+        return null;
+      }
+    }),
+  updateInterviewRecord: protectedProcedure
+    .input(z.object({ id: z.string(), key: z.string(), value: z.any() }))
+    .mutation(async ({ input, ctx }) => {
+      const { id, key, value } = input;  
+      try {
+        const existingRecord = await ctx.db.interviewRecord.update({
+          where: { id },
+          data: {
+            [key]: value,
+          },
+        });
+        return existingRecord;
+      } catch (error) {
+        console.error("Error updating record:", error);
         return null;
       }
     }),
