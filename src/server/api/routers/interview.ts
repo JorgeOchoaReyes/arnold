@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+import { type InterviewRecord } from "@prisma/client";
 import { z } from "zod"; 
 import {
   createTRPCRouter, 
@@ -12,11 +14,32 @@ const interviewZod = z.object({
   characteristics: z.array(z.string()),
   companySimilarTo: z.array(z.string()),
   interviewType: z.string(),
-  botIconUrl: z.string(),
+  botIconUrl: z.string().nullable(),
   vapiBotId: z.string(),
-  backgroundUrl: z.string(),
+  backgroundUrl: z.string().nullable(),
 }); 
-
+ 
+const testFeature = {
+  "id": "test-1",
+  "name": "Amazon Technical Interview",
+  "description": "Amazon Technical Interview focused on data structures and algorithms.",
+  "duration": "20-30 minutes",
+  "characteristics": [
+    "Hard",
+    "Technical Focused",
+    "Foundations",
+    "Neutral Feedback"
+  ],
+  "companySimilarTo": [
+    "Google",
+    "Microsoft",
+    "Apple"
+  ],
+  "interviewType": "Technical",
+  "botIconUrl": "/aggresive.svg",
+  "vapiBotId": "8899d743-bfda-434e-97d5-dbd21f60fa1c",
+  "backgroundUrl": "https://images.unsplash.com/photo-1704204656144-3dd12c110dd8?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8YW1hem9uJTIwd2Vic2l0ZXxlbnwwfHwwfHx8MA%3D%3D",
+};
 
 export const interviewRouter = createTRPCRouter({
   listInterviews: protectedProcedure
@@ -26,21 +49,91 @@ export const interviewRouter = createTRPCRouter({
     }), 
   startInterviewRecord: protectedProcedure
     .input(z.object({ interview: interviewZod}))
-    .mutation(async ({ input }) => {
-      console.log("input", input);
+    .mutation(async ({ input, ctx }) => {
+      const { interview } = input;   
+      const newRecord: Omit<InterviewRecord, "id"> = {
+        interviewId: interview.id,
+        userId: ctx.session.user.id, 
+        vapiBotId: interview.vapiBotId,
+        name: interview.name,
+        description: interview.description,
+        characteristics: interview.characteristics,
+        companySimilarTo: interview.companySimilarTo,   
+        feedback: null,
+        resumeId: null,
+        status: "scheduled",
+        analysisStatus: "pending",
+        interviewType: interview.interviewType,
+        vapiCallId: null,
+        usersCode: null,
+        usersNotes: null,
+        analysisResult: null,
+        startTime: null,
+        endTime: null, 
+      };
+      try {
+        const existingRecord = await ctx.db.interviewRecord.create({
+          data: newRecord,
+        });
+        if (existingRecord) {
+          return existingRecord.id; 
+        }
+      } catch (error) {
+        console.error("Error checking existing record:", error);
+        return null;
+      }
     }),
-  getInterviewRecords: protectedProcedure
-    .input(z.object({ text: z.string() }))
-    .mutation(async ({ input }) => {
-      console.log("input", input);
+  updateInterviewRecord: protectedProcedure
+    .input(z.object({ id: z.string(), key: z.string(), value: z.any() }))
+    .mutation(async ({ input, ctx }) => {
+      const { id, key, value } = input;  
+      try {
+        const existingRecord = await ctx.db.interviewRecord.update({
+          where: { id },
+          data: {
+            [key]: value,
+          },
+        });
+        return existingRecord;
+      } catch (error) {
+        console.error("Error updating record:", error);
+        return null;
+      }
+    }),
+  getInterviewRecords: protectedProcedure 
+    .query(async ({ ctx }) => {
+      try {
+        const records = await ctx.db.interviewRecord.findMany({
+          where: {
+            userId: ctx.session.user.id,
+          }, 
+        });
+        return records;
+      } catch (error) {
+        console.error("Error fetching interview records:", error);
+        return null;
+      }
     }),
   getInterviewRecordById: protectedProcedure
-    .input(z.object({ text: z.string() }))
-    .mutation(async ({ input }) => {
-      console.log("input", input);
-    }),
-    
-
+    .input(z.object({ id: z.string() }))
+    .query(async ({ input, ctx }) => {
+      const { id } = input; 
+      if(!id || id === "") {
+        console.log("No Id");
+        return null;
+      }
+      try {
+        const record = await ctx.db.interviewRecord.findUnique({
+          where: {
+            id,
+          },
+        });
+        return record;
+      } catch (error) {
+        console.error("Error fetching interview record:", error);
+        return null;
+      }
+    }), 
   seedInterviews: protectedProcedure
     .input(z.object({ text: z.string() }))
     .mutation(async ({ input }) => {

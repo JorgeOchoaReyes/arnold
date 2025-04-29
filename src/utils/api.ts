@@ -8,6 +8,7 @@ import { httpBatchLink, loggerLink } from "@trpc/client";
 import { createTRPCNext } from "@trpc/next";
 import { type inferRouterInputs, type inferRouterOutputs } from "@trpc/server";
 import superjson from "superjson";
+import { ssrPrepass } from "@trpc/next/ssrPrepass";
 
 import { type AppRouter } from "~/server/api/root";
 
@@ -19,6 +20,9 @@ const getBaseUrl = () => {
 
 /** A set of type-safe react-query hooks for your tRPC API. */
 export const api = createTRPCNext<AppRouter>({
+  // ssr: true,
+  // ssrPrepass: ssrPrepass,
+  ssr: false,
   config() {
     return {
       /**
@@ -48,8 +52,7 @@ export const api = createTRPCNext<AppRouter>({
    * Whether tRPC should await queries when server rendering pages.
    *
    * @see https://trpc.io/docs/nextjs#ssr-boolean-default-false
-   */
-  ssr: false,
+   */ 
   transformer: superjson,
 });
 

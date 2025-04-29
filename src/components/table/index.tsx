@@ -18,11 +18,13 @@ import {
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
+  onClickRow?: (id: string) => Promise<void>;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  onClickRow
 }: DataTableProps<TData, TValue>) {
   const table = useReactTable({
     data,
@@ -57,6 +59,9 @@ export function DataTable<TData, TValue>({
               <TableRow
                 key={row.id}
                 data-state={row.getIsSelected() && "selected"}
+                onClick={async () => { 
+                  if(onClickRow) await onClickRow((row.original as {id: string}).id ?? "");
+                }}
                 className={`cursor-pointer hover:bg-[#e7ecff] py-10 transition-all hover:text-black text-pretty ${index % 2 === 0 ? "bg-secondary" : ""}`}
               >
                 {row.getVisibleCells().map((cell) => (

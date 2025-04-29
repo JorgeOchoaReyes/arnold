@@ -1,6 +1,6 @@
 import React from "react"; 
-import { Card } from "../ui/card"; 
-import { useRouter } from "next/router";
+import { Card } from "../ui/card";   
+import { coloring, contrastColor } from "~/utils/help";
 
 const testFeature = {
   "id": "test-1",
@@ -18,33 +18,18 @@ const testFeature = {
     "Microsoft",
     "Apple"
   ],
-  "interviewType": "Technical",
+  "interviewType": "technical",
   "botIconUrl": "/aggresive.svg",
   "vapiBotId": "test-1",
   "backgroundUrl": "https://images.unsplash.com/photo-1704204656144-3dd12c110dd8?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8YW1hem9uJTIwd2Vic2l0ZXxlbnwwfHwwfHx8MA%3D%3D" 
-};
+}; 
 
-const coloring = {
-  "hard": "#ff0000",
-  "medium": "#ff9900",  
-  "easy": "#00ff00",
-  "technical focused": "#0000ff",
-  "behavioral": "#ff00ff",
-  "foundations": "#00ffff",
-  "neutral feedback": "#ffff00",
-};
-
-const contrastColor = (hex: string) => {
-  const r = parseInt(hex.slice(1, 3), 16);
-  const g = parseInt(hex.slice(3, 5), 16);
-  const b = parseInt(hex.slice(5, 7), 16);
-  const brightness = (r * 299 + g * 587 + b * 114) / 1000;
-  return brightness > 128 ? "#000000" : "#ffffff";
-};
-
-export const Featured = () => {
-  const router = useRouter();
-  return <div className="relative hover:scale-[1.1] transition-all" onClick={async () => {await router.push(`/dashboard/interviews/${testFeature.id}`);}}>  
+export const Featured: React.FC<{
+  onClick?: () => void,
+}> = ({
+  onClick = () => null,
+}) => { 
+  return <div className="relative hover:scale-[1.1] transition-all" onClick={onClick}>  
     <Card  
       style={{ 
         position: "relative",
@@ -67,7 +52,7 @@ export const Featured = () => {
                 backgroundColor: bgColor,
                 color: contrastColor(bgColor),
               }}
-              className={"text-[10px] text-pretty rounded-full font-bold px-1 py-1"}>{characteristic} </span>; 
+              className={"text-[10px] text-pretty rounded-full border-2 px-1 py-1"}>{characteristic} </span>; 
           })
         }
       </div>
